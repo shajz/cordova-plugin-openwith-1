@@ -25,6 +25,7 @@ module.exports = function(context) {
       if (err) {
         throw redError(err.message);
       }
+      deferral.resolve();
     });
   });
 

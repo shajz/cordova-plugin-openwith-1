@@ -17,14 +17,13 @@
        under the License.
  */
 
-package com.missiveapp.openwith;
+package ##ANDROID_PACKAGE_NAME##;
 
 import android.content.Intent;
 import android.os.Bundle;
+import org.apache.cordova.*;
 
-import ##ANDROID_PACKAGE_NAME##.MainActivity;
-
-public class OpenWithActivity extends MainActivity
+public class OpenWithActivity extends CordovaActivity
 {
     @Override
     public void onCreate(Bundle savedInstanceState)
@@ -37,5 +36,14 @@ public class OpenWithActivity extends MainActivity
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
         }
+
+        // enable Cordova apps to be started in the background
+        Bundle extras = getIntent().getExtras();
+        if (extras != null && extras.getBoolean("cdvStartInBackground", false)) {
+            moveTaskToBack(true);
+        }
+
+        // Set by <content src="index.html" /> in config.xml
+        loadUrl(launchUrl);
     }
 }
