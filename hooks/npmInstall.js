@@ -18,7 +18,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-const PLUGIN_ID = 'cordova-plugin-openwith';
+const PLUGIN_ID = 'cordova-plugin-openwith-shajz';
 
 module.exports = function() {
     let child_process = require('child_process');
