@@ -1,27 +1,25 @@
-const ACTIVITY_PATH = './platforms/android/app/src/main/java/com/missiveapp/openwith/OpenWithActivity.java';
+const ACTIVITY_PATH =
+  './platforms/android/app/src/main/java/com/missiveapp/openwith/OpenWithActivity.java';
 
 const fs = require('fs');
-const path = require('path');
 
-const {
-  redError,
-} = require('./utils')
+const {redError} = require('./utils');
 
 module.exports = function(context) {
-  var deferral = require('q').defer();
+  let deferral = require('q').defer();
 
-  var parser = context.requireCordovaModule('cordova-common').ConfigParser;
-  var config = new parser("config.xml");
-  var packageName = config.android_packageName() || config.packageName();
+  let parser = context.requireCordovaModule('cordova-common').ConfigParser;
+  let config = new parser('config.xml');
+  let packageName = config.android_packageName() || config.packageName();
 
-  fs.readFile(ACTIVITY_PATH, 'utf8', function (err,data) {
+  fs.readFile(ACTIVITY_PATH, 'utf8', (err, data) => {
     if (err) {
       throw redError(err.message);
     }
 
-    var result = data.replace(/##ANDROID_PACKAGE_NAME##/g, packageName);
+    let result = data.replace(/##ANDROID_PACKAGE_NAME##/g, packageName);
 
-    fs.writeFile(ACTIVITY_PATH, result, 'utf8', function (err) {
+    fs.writeFile(ACTIVITY_PATH, result, 'utf8', (err) => {
       if (err) {
         throw redError(err.message);
       }

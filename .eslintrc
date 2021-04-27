@@ -16,12 +16,15 @@
     "me": true
   },
   "rules": {
+    "linebreak-style": "off",
+    "new-cap": "off",
+
     "camelcase": 0,
     "eqeqeq": 1,
     "no-extra-parens": 2,
     "max-len": 0,
     "valid-jsdoc": 1,
-    "require-jsdoc": 1,
+    "require-jsdoc": 0,
     "array-bracket-spacing": 1,
     "block-spacing": 1,
     "brace-style": 1,

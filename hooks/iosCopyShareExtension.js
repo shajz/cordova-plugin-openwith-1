@@ -7,10 +7,10 @@ const {
   findXCodeproject,
   replacePreferencesInFile,
   log, redError,
-} = require('./utils')
+} = require('./utils');
 
 function copyFileSync(source, target, preferences) {
-  var targetFile = target;
+  let targetFile = target;
 
   // If target is a directory a new file with the same name will be created
   if (fs.existsSync(target)) {
@@ -24,10 +24,10 @@ function copyFileSync(source, target, preferences) {
 }
 
 function copyFolderRecursiveSync(source, target, preferences) {
-  var files = [];
+  let files = [];
 
   // Check if folder needs to be created or integrated
-  var targetFolder = path.join(target, path.basename(source));
+  let targetFolder = path.join(target, path.basename(source));
   if (!fs.existsSync(targetFolder)) {
     fs.mkdirSync(targetFolder);
   }
@@ -35,8 +35,8 @@ function copyFolderRecursiveSync(source, target, preferences) {
   // Copy
   if (fs.lstatSync(source).isDirectory()) {
     files = fs.readdirSync(source);
-    files.forEach(function(file) {
-      var curSource = path.join(source, file);
+    files.forEach((file) => {
+      let curSource = path.join(source, file);
       if (fs.lstatSync(curSource).isDirectory()) {
         copyFolderRecursiveSync(curSource, targetFolder, preferences);
       } else {
@@ -47,18 +47,18 @@ function copyFolderRecursiveSync(source, target, preferences) {
 }
 
 module.exports = function(context) {
-  log('Copying ShareExtension files to iOS project')
+  log('Copying ShareExtension files to iOS project');
 
-  var deferral = require('q').defer();
+  let deferral = require('q').defer();
 
-  findXCodeproject(context, function(projectFolder, projectName) {
-    var preferences = getPreferences(context, projectName);
+  findXCodeproject(context, (projectFolder, projectName) => {
+    let preferences = getPreferences(context, projectName);
 
-    var srcFolder = path.join(context.opts.projectRoot, 'plugins', PLUGIN_ID, 'src', 'ios', 'ShareExtension');
-    var targetFolder = path.join(context.opts.projectRoot, 'platforms', 'ios');
+    let srcFolder = path.join(context.opts.projectRoot, 'plugins', PLUGIN_ID, 'src', 'ios', 'ShareExtension');
+    let targetFolder = path.join(context.opts.projectRoot, 'platforms', 'ios');
 
     if (!fs.existsSync(srcFolder)) {
-      throw redError('Missing extension project folder in ' + srcFolder + '.');
+      throw redError(`Missing extension project folder in ${srcFolder}.`);
     }
 
     copyFolderRecursiveSync(srcFolder, targetFolder, preferences);

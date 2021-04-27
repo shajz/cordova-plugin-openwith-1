@@ -18,16 +18,16 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-const PLUGIN_ID = "cordova-plugin-openwith";
+const PLUGIN_ID = 'cordova-plugin-openwith';
 
-module.exports = function (context) {
-    var child_process = require('child_process');
-    var deferral = require('q').defer();
+module.exports = function() {
+    let child_process = require('child_process');
+    let deferral = require('q').defer();
 
-    console.log('Installing "' + PLUGIN_ID + '" dependencies');
-    child_process.exec('npm install --production', {cwd:__dirname}, function (error) {
+    console.log(`Installing "${PLUGIN_ID}" dependencies`);
+    child_process.exec('npm install --production', {cwd: __dirname}, (error) => {
         if (error !== null) {
-            console.log('exec error: ' + error);
+            console.log(`exec error: ${error}`);
             deferral.reject('npm installation failed');
         }
         deferral.resolve();
